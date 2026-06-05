@@ -319,10 +319,7 @@
     resultBox.querySelector(".r-station-zh").textContent = station.zh;
     resultBox.querySelector(".r-station-en").textContent = station.en || "";
 
-    const chip = resultBox.querySelector(".r-line");
-    chip.textContent = sys.name + " · " + line.name;
-    chip.style.background = line.color;
-    chip.style.color = textOn(line.color);
+    resultBox.querySelector(".r-line").textContent = sys.name + " · " + line.name;
 
     resultBox.querySelector(".r-code").textContent = station.code ? "站號 " + station.code : "";
 

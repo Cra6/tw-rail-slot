@@ -314,6 +314,7 @@ html, body {
   color: var(--btext, #fff);
   box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
 }
+.result-banner .r-line { font-size: .9rem; font-weight: 800; opacity: .92; margin-bottom: 6px; letter-spacing: .5px; }
 .r-station-zh { font-size: 1.9rem; font-weight: 900; letter-spacing: 2px; }
 .r-station-en { font-size: .9rem; opacity: .9; margin-top: 2px; letter-spacing: .5px; }
 
