@@ -2,46 +2,27 @@
 (function () {
   "use strict";
 
-  // ---- 趣味任務池 ----
-  // sys: "all"=各系統都可、"metro"=只給捷運/輕軌、"tra"=只給台鐵
-  const TASKS = [
-    // — 吃喝 × 收集 —
-    { t: "出站找一間在地小吃,吃一餐", sys: "all" },
-    { t: "便利商店買一樣沒喝過的飲料", sys: "all" },
-    { t: "找站附近的排隊名店,跟著排一次", sys: "all" },
-    { t: "找一間在地人才知道的早餐店", sys: "all" },
-    { t: "買一份這站附近的伴手禮或名產", sys: "all" },
-    { t: "點一杯店員推薦的手搖來喝", sys: "all" },
-    { t: "找一間咖啡廳坐下來喝一杯", sys: "all" },
-    { t: "挑戰用 50 元在這站解決一餐", sys: "all" },
-    { t: "蒐集這一站的紀念章", sys: "tra" },
-    { t: "把這張車票票根留下來當紀念", sys: "tra" },
-    { t: "逛一圈站內商場或站旁小店", sys: "metro" },
-    // — 散步探索 × 拍照 —
-    { t: "出站隨機選一個方向,走 15 分鐘不看地圖", sys: "all" },
-    { t: "搭到這條線的終點站再回來", sys: "all" },
-    { t: "搭到下一站,再用走的走回來", sys: "all" },
-    { t: "拍一張月台或站體的照片", sys: "all" },
-    { t: "在站名牌前拍一張打卡照", sys: "all" },
-    { t: "在站內拍一個你以前沒注意過的細節", sys: "all" },
-    { t: "找站附近一條沒走過的巷子鑽進去", sys: "all" },
-    { t: "走到站附近最高的地方往下看", sys: "all" },
-    { t: "找站附近一座公園或廟,待五分鐘", sys: "all" },
-    { t: "隨機挑一個出口出站,看看外面長怎樣", sys: "metro" },
-    { t: "沿著鐵軌方向走,找一個拍火車的好角度", sys: "tra" },
-    // — 互動 × 隨機挑戰 —
-    { t: "問一位站務員或在地人一個你好奇的問題", sys: "all" },
-    { t: "跟一家店的老闆聊兩句", sys: "all" },
-    { t: "擲硬幣決定出站後往左還是往右", sys: "all" },
-    { t: "限自己花 100 元,看能在這站玩出什麼", sys: "all" },
-    { t: "幫這一站想一句專屬廣告詞", sys: "all" },
-    { t: "限時 30 分鐘,在這站完成一件小事再走", sys: "all" },
-    { t: "用這站的站名造一句中二台詞", sys: "all" },
-    { t: "看看下一班車要去哪,假裝你要搭上去", sys: "all" },
-    { t: "找站內路網圖,記住三個沒聽過的站名", sys: "all" },
-    { t: "在月台數數看這班車有幾節車廂", sys: "tra" },
-    { t: "跟同行的人玩一局「猜下一站」", sys: "all" },
-  ];
+  // ---- 趣味任務池(內容請改 data/tasks.js,不用動這裡)----
+  // 解析 window.GAME_TASKS:一行一個任務;空行/# 開頭=註解;
+  // 行尾 [台鐵]/[捷運] 限定系統(tra/metro),沒寫就是全部(all)。
+  function parseTasks(raw) {
+    const out = [];
+    String(raw || "").split("\n").forEach((line) => {
+      let s = line.trim();
+      if (!s || s.charAt(0) === "#") return;
+      let sys = "all";
+      const m = s.match(/\[\s*(台鐵|捷運|tra|metro)\s*\]$/i);
+      if (m) {
+        const tag = m[1].toLowerCase();
+        sys = (tag === "台鐵" || tag === "tra") ? "tra" : "metro";
+        s = s.slice(0, m.index).trim();
+      }
+      if (s) out.push({ t: s, sys: sys });
+    });
+    if (!out.length) out.push({ t: "出站走走,隨意逛一圈", sys: "all" }); // 清單空了的保底
+    return out;
+  }
+  const TASKS = parseTasks(window.GAME_TASKS);
 
   const HISTORY_KEY = "twslot_history_v1";
   const MUTE_KEY = "twslot_muted_v1";
