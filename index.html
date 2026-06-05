@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="台灣火車與捷運拉霸抽站機 — 選系統、拉一把,隨機抽出路線、車站與一個小任務。" />
+  <title>🎰 台灣軌道拉霸機</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- ===== 選擇畫面 ===== -->
+    <section id="screen-select" class="screen">
+      <header class="hero">
+        <div class="hero-logo">🎰</div>
+        <h1>台灣軌道拉霸機</h1>
+        <p class="subtitle">選一個系統,拉一把 — 看老天爺今天送你去哪一站</p>
+      </header>
+
+      <div id="system-grid" class="system-grid" role="list">
+        <!-- 系統卡片由 app.js 注入 -->
+      </div>
+
+      <footer class="foot">
+        純好玩 · 資料離線內建 · <span id="stat-foot">載入中…</span>
+      </footer>
+    </section>
+
+    <!-- ===== 拉霸機畫面 ===== -->
+    <section id="screen-machine" class="screen hidden">
+      <div class="machine-top">
+        <button id="btn-back" class="btn ghost">↩ 重選系統</button>
+        <div class="sys-title">
+          <span id="sys-icon"></span><span id="sys-name"></span>
+        </div>
+        <button id="btn-mute" class="btn ghost icon-btn" aria-pressed="false" title="音效開關">🔊</button>
+      </div>
+
+      <div class="line-filter">
+        <label for="line-select">路線範圍</label>
+        <select id="line-select"></select>
+      </div>
+
+      <div class="cabinet">
+        <div class="cabinet-glass">
+          <div class="reels">
+            <div class="reel" id="reel-line"><div class="reel-strip"></div></div>
+            <div class="reel" id="reel-station"><div class="reel-strip"></div></div>
+            <div class="reel" id="reel-task"><div class="reel-strip"></div></div>
+            <div class="payline" aria-hidden="true"></div>
+          </div>
+          <div class="reel-labels">
+            <span>🛤 路線</span><span>🚉 車站</span><span>🎯 任務</span>
+          </div>
+        </div>
+
+        <div class="lever" id="lever" title="拉我!" role="button" tabindex="0" aria-label="拉霸">
+          <div class="lever-track"></div>
+          <div class="lever-arm">
+            <div class="lever-stick"></div>
+            <div class="lever-ball"></div>
+          </div>
+        </div>
+      </div>
+
+      <button id="btn-spin" class="btn spin">🎰 拉霸!</button>
+
+      <div id="result" class="result hidden" aria-live="polite">
+        <div class="result-banner" id="result-banner">
+          <div class="r-station-zh"></div>
+          <div class="r-station-en"></div>
+        </div>
+        <div class="result-meta">
+          <span class="chip r-line"></span>
+          <span class="r-code"></span>
+          <a class="r-map" target="_blank" rel="noopener">🗺 在地圖上看</a>
+        </div>
+        <div class="r-task">🎯 <span></span></div>
+        <div class="result-actions">
+          <button id="btn-again" class="btn">🎰 再抽一次</button>
+          <button id="btn-back2" class="btn ghost">↩ 重選系統</button>
+        </div>
+      </div>
+
+      <aside class="history">
+        <div class="history-head">
+          <h3>📜 抽站紀錄</h3>
+          <button id="btn-clear" class="btn tiny ghost">清空</button>
+        </div>
+        <ul id="history-list" class="history-list"></ul>
+        <p id="history-empty" class="history-empty">還沒抽過,拉一把吧!</p>
+      </aside>
+    </section>
+
+  </div>
+
+  <!-- 站點資料(離線內建,雙擊與 GitHub Pages 都可用) -->
+  <script src="data/stations.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

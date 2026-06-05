@@ -1,0 +1,5 @@
+# 開發用,不需要進 repo
+.claude/
+node_modules/
+.DS_Store
+Thumbs.db
