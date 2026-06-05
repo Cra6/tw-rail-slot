@@ -59,19 +59,26 @@ html, body {
 .btn:hover { filter: brightness(1.05); }
 .btn:disabled { filter: grayscale(.5) brightness(.8); cursor: not-allowed; box-shadow: 0 6px 0 #7a5a05; }
 
+/* 粉色 = 拉霸/再抽,主要動作統一一種樣式 */
 .btn.spin {
-  display: block;
-  width: 100%;
-  font-size: 1.4rem;
-  letter-spacing: 2px;
-  padding: 18px;
-  margin-top: 18px;
+  font-size: 1.12rem;
+  letter-spacing: 1px;
   background: linear-gradient(180deg, #ff8aa8, var(--neon) 55%, #c40d3c);
   color: #fff;
   text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
-  box-shadow: 0 6px 0 #8a0a29, 0 12px 26px rgba(255, 59, 107, .35);
+  box-shadow: 0 5px 0 #8a0a29, 0 9px 18px rgba(255, 59, 107, .3);
 }
-.btn.spin:active { box-shadow: 0 2px 0 #8a0a29, 0 8px 16px rgba(255, 59, 107, .35); }
+.btn.spin:active { box-shadow: 0 2px 0 #8a0a29, 0 6px 12px rgba(255, 59, 107, .3); }
+
+/* 主拉霸鈕:全寬、稍大,當頁面主視覺 */
+#btn-spin {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  padding: 15px;
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+}
 
 .btn.ghost {
   background: transparent;
@@ -83,7 +90,7 @@ html, body {
 }
 .btn.ghost:active { transform: translateY(2px); background: rgba(255, 255, 255, .05); }
 .btn.tiny { padding: 6px 12px; font-size: .8rem; }
-.icon-btn { font-size: 1.2rem; padding: 8px 12px; }
+.icon-btn { font-size: 1.15rem; padding: 9px 13px; }
 
 /* ---------- 選擇畫面 ---------- */
 .hero { text-align: center; padding: 22px 8px 26px; }
@@ -301,13 +308,13 @@ html, body {
 @keyframes pop { from { transform: scale(.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 .result-banner {
   border-radius: 12px;
-  padding: 18px 12px;
+  padding: 14px 14px;
   margin-bottom: 12px;
   background: var(--bcolor, #333);
   color: var(--btext, #fff);
   box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
 }
-.r-station-zh { font-size: 2.2rem; font-weight: 900; letter-spacing: 2px; }
+.r-station-zh { font-size: 1.9rem; font-weight: 900; letter-spacing: 2px; }
 .r-station-en { font-size: .9rem; opacity: .9; margin-top: 2px; letter-spacing: .5px; }
 
 .result-meta {
@@ -319,21 +326,25 @@ html, body {
   margin-bottom: 10px;
 }
 .chip {
-  padding: 4px 12px;
+  padding: 5px 13px;
   border-radius: 999px;
   font-weight: 800;
-  font-size: .9rem;
+  font-size: .88rem;
   color: #fff;
   background: #555;
 }
-.r-code { color: var(--muted); font-weight: 700; font-size: .9rem; }
+.r-code { color: var(--muted); font-weight: 700; font-size: .85rem; }
 .r-map {
   color: var(--gold);
   font-weight: 800;
+  font-size: .85rem;
   text-decoration: none;
-  border-bottom: 1.5px dashed var(--gold);
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: rgba(255, 196, 48, .12);
+  border: 1px solid rgba(255, 196, 48, .4);
 }
-.r-map:hover { filter: brightness(1.15); }
+.r-map:hover { filter: brightness(1.12); background: rgba(255, 196, 48, .2); }
 .r-task {
   background: rgba(255, 196, 48, .12);
   border: 1px solid rgba(255, 196, 48, .35);
@@ -342,7 +353,8 @@ html, body {
   font-weight: 700;
   margin-bottom: 14px;
 }
-.result-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.result-actions { display: flex; gap: 10px; justify-content: center; }
+.result-actions .btn { flex: 1 1 0; min-width: 0; padding-left: 14px; padding-right: 14px; font-size: 1rem; }
 
 /* ---------- 歷史 ---------- */
 .history { margin-top: 22px; }
